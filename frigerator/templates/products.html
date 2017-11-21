@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html style="background-image: url(https://static.houselogic.com/content/images/kitchen-paint-ideas-standard_f7ecbaaba98376f4c5357e7af8ccd477.jpg); background-size:     cover;  background-attachment: fixed;   ">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="{% static '/style.css' %}" />
+</head>
+
+<body>
+{% if username %}
+Hello, {{username}}. <a href="/admin/logout">Logout</a>
+
+<ol>
+{% for item in products %}
+
+<li>{{item.product.name}}
+
+<form action="" method="POST" />
+{% csrf_token %}
+
+<input type="hidden" name="fridge_id" value="{{item.id}}" />
+<input type="hidden" name="action" value="DELETE" />
+<input type="submit" value="X" class="danger"/>
+</form>
+
+{% endfor %}
+</ol>
+{% if error %}
+<p class="danger">{{error}}</p>
+{% endif %}
+<form action="" method="POST">
+{% csrf_token %}
+<input type="text" name="product_name" />
+<input type="hidden" name="action" value="ADD" />
+<input type="submit" value="Add" />
+</form>
+
+{% else %}
+<p class="danger">Sorry, you should <a href="/admin">login</a> to see list of products</p>
+{% endif %}
+
+{% for recipy in recipys %}
+<h2>{{recipy.name}}</h2>
+<p> {{recipy.text}}
+</p>
+{% endfor %}
+</body>
+</html>

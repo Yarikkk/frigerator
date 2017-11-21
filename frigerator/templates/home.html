@@ -1,0 +1,14 @@
+
+<h1>{{title}}</h1>
+
+{{big_text}}
+
+Now: {{current_time}}
+
+{% for item in pages %}
+<h1>{{item.name}}</h1>
+<p>{{item.text}}</p>
+{% for comment in item.comment_set.all %}
+<li><strong>{{comment.author.username}}:</strong>{{comment.text}}</li>
+{% endfor%}
+{% endfor %}
